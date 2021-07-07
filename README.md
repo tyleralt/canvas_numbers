@@ -1,6 +1,4 @@
-# Project Title
-
-Canvas Number
+# Canvas Number
 
 ## Description
 
