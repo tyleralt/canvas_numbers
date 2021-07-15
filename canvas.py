@@ -17,7 +17,7 @@ API_PREFIX = "api/v1"
 
 
 class CanvasController:
-    """Used to control individual pannels on a canvas"""
+    """Used to control individual panels on a canvas"""
 
     def __init__(self, socket_address):
         self._socket_address = socket_address
@@ -52,7 +52,6 @@ class CanvasController:
                 if resp.ok:
                     return
             except requests.RequestException as e:
-                print(e)
                 traceback.print_exc()
                 time.sleep(2)
 
@@ -74,7 +73,7 @@ class CanvasController:
 
     def iter_touch_events(self):
         """
-        yields an iterator with a tuple containing the pannel id, and the gesture_type
+        yields an iterator with a tuple containing the panel id, and the gesture type
 
         possible gesture values and their meaning:
         0 Single Tap
@@ -140,7 +139,8 @@ class CanvasController:
 
     @classmethod
     def get_current_state(cls):
-        """get the current state
+        """get the current state of the canvas. This includes all of the locations of the tiles in
+        x and y coordinates.
 
         eg output:
         {
@@ -266,7 +266,7 @@ class CanvasNumberDisplay:
     OFF_COLOR = (0, 0, 0)
 
     def _intialize_display_grid_pannel_ids(self):
-        """find which panel ids should be associated with index of the display grid and set
+        """find which panel ids should be associated with each index of the display grid and set
         them in self._display_grid_pannel_ids"""
 
         self._display_grid_pannel_ids = [
@@ -297,7 +297,6 @@ class CanvasNumberDisplay:
             x_index = round((pd["x"] - min_x) / 100)
             y_index = round((pd["y"] - min_y) / 100)
             if 0 <= x_index <= 3 and 0 <= y_index <= 6:
-                print(x_index, y_index)
                 self._display_grid_pannel_ids[y_index][x_index] = pd["panelId"]
 
     def __init__(self, canvas_controller):
@@ -314,7 +313,7 @@ class CanvasNumberDisplay:
                 pannel_id = self._display_grid_pannel_ids[-y - 1][x]
 
                 if pannel_id is None:
-                    print(f"there was no pannel for {x}, {y}")
+                    print(f"there was no panel for {x}, {y}")
                     continue
                 self._canvas_controller.set_color(pannel_id, color, 2)
 

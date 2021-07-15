@@ -2,6 +2,7 @@ import time
 import traceback
 from canvas import CanvasController, CanvasNumberDisplay
 
+
 def main():
     """
     Run a demo on the local canvas controller displaying numbers 0 - 9
